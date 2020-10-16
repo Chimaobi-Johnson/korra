@@ -7,12 +7,17 @@ import { createSwitchNavigator } from "@react-navigation/compat";
 import UserProfileScreen from "../screens/user/UserProfile";
 import AuthScreen from "../screens/auth/Login";
 import colors from "../theme/colors";
-import FeedScreen from '../screens/user/Feed';
+import FeedScreen from '../screens/Feed';
+import QuestionScreen from '../screens/QuestionFeed';
+import QuestionFeed from '../screens/QuestionFeed';
+import QuestionMainFeed from '../screens/QuestionMainFeed';
 
 
 const UserNavigator = createStackNavigator({
     // UserProfile: UserProfileScreen,
-    Feed: FeedScreen
+    // Feed: FeedScreen,
+    // Question: QuestionFeed,
+    QuestionFeed: QuestionMainFeed
 }, {
     defaultNavigationOptions: {
         headerStyle: {
