@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { ScrollView, View, Text, KeyboardAvoidingView, StyleSheet, Button, ImageBackground } from "react-native";
+import { ScrollView, View, Text, KeyboardAvoidingView, StyleSheet, Image, Button, ImageBackground } from "react-native";
 import { Picker } from '@react-native-community/picker';
 import Header from "../../components/UI/Header";
 import Input from "../../components/UI/Input";
@@ -8,6 +8,7 @@ import colors from "../../theme/colors";
 const backImage = require('../../assets/images/priscilla-du-preez-iprSslEBheg-unsplash.jpg')
 const backImage2 = require('../../assets/images/smiling-4654734_1280.jpg');
 const backImage3 = require('../../assets/images/pexels-luis-quintero-1408196.jpg');
+const logo = require('../../assets/images/korralogomain2.png')
 
 const pictureStack = [backImage, backImage2, backImage3];
 
@@ -36,7 +37,9 @@ const AuthPage = props => {
     if(isLogin) {
         return (
             <ImageBackground source={backImage} style={styles.backgroundImage}>
-                <Header style={{ marginTop: 20, marginLeft: 10 }} size="sm" color="#2196f3" text="KORRA" />
+                <View style={styles.imageContainer}>
+                    <Image source={logo} style={styles.logo} />
+                </View>
                 <View style={styles.formContainer}>
                     <View style={styles.loginWithContainer}>
                         <Header color="#ffffffc7" size="lg" text="LOGIN" />
@@ -45,7 +48,7 @@ const AuthPage = props => {
                     </View>
                     <View>
                     <ScrollView>
-                        <View style={styles.formContent}>
+                        <KeyboardAvoidingView behavior="padding" keyboardVerticalOffset={50} style={styles.formContent}>
                         <Input 
                             id="email" 
                             label="Email" 
@@ -73,7 +76,7 @@ const AuthPage = props => {
                             onInputChange={() => {}}
                             initialValue="" 
                         />
-                        </View> 
+                        </KeyboardAvoidingView> 
                         <Button title="Login" onPress={() => {}} />
                         <Button onPress={() => setLogin(!isLogin)} title="Switch to Sign Up" color="transparent" />
                     </ScrollView>
@@ -84,9 +87,10 @@ const AuthPage = props => {
     } else {
         return (
             <ImageBackground source={backImage3} style={styles.backgroundImage}>
-                <Header style={{ marginTop: 20, marginLeft: 10 }} size="sm" color="#2196f3" text="KORRA" />
-                <View style={styles.formContainer}>
-                {/* <View style={styles.formContainer}> */}
+                <View style={styles.imageContainer}>
+                    <Image source={logo} style={styles.logo} />
+                </View>
+                <KeyboardAvoidingView style={styles.formContainer}>
                 <ScrollView>
                     <View style={styles.loginWithContainer}>
                         <Header color="#ffffffc7" size="lg" text="REGISTER" />
@@ -94,7 +98,7 @@ const AuthPage = props => {
                     </View>
                     <View>
                     <ScrollView>
-                        <KeyboardAvoidingView style={styles.formContent}>
+                        <KeyboardAvoidingView behavior="padding" keyboardVerticalOffset={50} style={styles.formContent}>
                         <Input 
                             id="firstName" 
                             label="First Name" 
@@ -182,9 +186,9 @@ const AuthPage = props => {
                         <Button onPress={() => setLogin(!isLogin)} title="Switch to Sign In" color="transparent" />
                     </ScrollView>
                     </View>
-                {/* </View> */}
+
                 </ScrollView>
-                </View>
+                </KeyboardAvoidingView>
             </ImageBackground>
         )
     }
@@ -230,6 +234,16 @@ const styles = StyleSheet.create({
     },
     altLoginText: {
         color: '#989898'
+    },
+    imageContainer: {
+        width: 50,
+        height: 50,
+        marginLeft: 10,
+        marginTop: 20
+    },
+    logo: {
+        width: '100%',
+        height: '100%',
     }
 })
 
