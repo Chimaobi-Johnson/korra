@@ -1,8 +1,9 @@
 import axios from 'axios';
 import { APP_URL } from '../../config';
-import { SIGN_UP_ERROR, SIGN_UP_SUCCESS, LOGIN_ERROR, LOGIN_SUCCESS } from './actionTypes';
+import { SIGN_UP_ERROR, SIGN_UP_SUCCESS, LOGIN_ERROR, LOGIN_SUCCESS, STORE_TOKEN } from './actionTypes';
 
 export const signUpSuccess = (response) => {
+    console.log(response);
     return {
         type: SIGN_UP_SUCCESS,
         payload: response
@@ -20,7 +21,7 @@ export const signUp = (formData) => {
     return dispatch => {
         axios.post(`${APP_URL}/auth/register`, formData)
         .then(response => {
-            dispatch(signUpSuccess(response.data))
+            dispatch(signUpSuccess(response))
         })
         .catch(err => {
             console.log(err)
@@ -47,11 +48,19 @@ export const login = (formData) => {
     return dispatch => {
         axios.post(`${APP_URL}/auth/login`, formData)
         .then(response => {
-            dispatch(loginSuccess(response.data))
+            console.log(response)
+            dispatch(loginSuccess(response))
         })
         .catch(err => {
             console.log(err)
             dispatch(loginError(err))
         })
     }   
+} 
+
+export const storeToken = (token) => {
+    return {
+        type: STORE_TOKEN,
+        payload: token
+    }
 } 

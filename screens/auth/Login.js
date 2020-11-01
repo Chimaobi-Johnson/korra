@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useReducer } from "react";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { ScrollView, View, Text, KeyboardAvoidingView, StyleSheet, Image, Button, ImageBackground, Alert } from "react-native";
 import { Picker } from '@react-native-community/picker';
 import Header from "../../components/UI/Header";
@@ -14,7 +14,6 @@ const logo = require('../../assets/images/korralogomain2.png')
 const loadingGif = require('../../assets/images/gifs/Eclipse-1s-200px.gif');
 
 const pictureStack = [backImage, backImage2, backImage3];
-
 
 const INPUT_CHANGE = 'INPUT_CHANGE';
 const INPUT_BLUR = 'INPUT_BLUR';
@@ -48,6 +47,7 @@ const AuthPage = props => {
     const [password, setPassword] = useState("");
     const [email, setEmail] = useState("");
 
+   
     useEffect(() => {
         // imageSlider();
     }, [pictureStack])
@@ -150,7 +150,7 @@ const AuthPage = props => {
             if(gender === "") {
                 Alert.alert("Please select gender")
             } else {
-                setRegLoading(true)
+                // setRegLoading(true)
                 const formData = {
                     firstName: inputState.firstName.value,
                     lastName: inputState.lastName.value,
@@ -164,6 +164,21 @@ const AuthPage = props => {
         }
 
     }
+
+    const authState = useSelector(state => state.auth);
+    console.log(authState);
+
+    useEffect(() => {
+        if(authState.status !== null) {
+            setLoginLoading(false)
+            if(authState.status === 200) {
+                console.log("login successful")
+            } else {
+                console.log("login failed")
+            }
+        }
+    }, [authState])
+
 
    const renderAuthComponent = () => {
     if(isLogin) {

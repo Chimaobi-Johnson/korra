@@ -4,5 +4,6 @@ export {
     signUp,
     login,
     loginError,
-    loginSuccess
+    loginSuccess,
+    storeToken
 } from './auth';
