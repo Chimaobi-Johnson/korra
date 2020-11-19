@@ -7,27 +7,28 @@ import colors from '../../theme/colors';
 
 
 const ProfileDetails = props => {
+    const { phone, country, groups, interests } = props;
     return (
         <ScrollView>
             <View style={styles.listContainer}>
                 <Text style={styles.iconContainer}><FontAwesomeIcon style={styles.icon} icon={faPhone} /></Text>
                 <Text style={styles.titleContainer}>Mobile Number</Text>
-                <Text style={styles.valueContainer}>07012191531</Text>
+                <Text style={styles.valueContainer}>{phone}</Text>
             </View>
             <View style={styles.listContainer}>
                 <Text style={styles.iconContainer}><FontAwesomeIcon style={styles.icon} icon={faMapMarker} /></Text>
                 <Text style={styles.titleContainer}>Country</Text>
-                <Text style={styles.valueContainer}>Australia</Text>
+                <Text style={styles.valueContainer}>{country}</Text>
             </View>
             <View style={styles.listContainer}>
                 <Text style={styles.iconContainer}><FontAwesomeIcon style={styles.icon} icon={faUsers} /></Text>
                 <Text style={styles.titleContainer}>Group</Text>
-                <Text style={styles.valueContainer}>Mental Health</Text>
+                <Text style={styles.valueContainer}>{groups.map(group => group + " ")}</Text>
             </View>
             <View style={styles.listContainer}>
                 <Text style={styles.iconContainer}><FontAwesomeIcon style={styles.icon} icon={faBicycle} /></Text>
                 <Text style={styles.titleContainer}>Interests</Text>
-                <Text style={styles.valueContainer}>Coding, teaching, music</Text>
+                <Text style={styles.valueContainer}>{interests.map(interest => interest + ", ")}</Text>
             </View>
         </ScrollView>
     )

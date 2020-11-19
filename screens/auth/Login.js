@@ -6,6 +6,8 @@ import Header from "../../components/UI/Header";
 import Input from "../../components/UI/Input";
 import colors from "../../theme/colors";
 import * as authActions from '../../store/actions'
+import UploadPicture from "./authSteps/UploadPicture";
+import OtherDetails from "./authSteps/OtherDetails";
 
 const backImage = require('../../assets/images/priscilla-du-preez-iprSslEBheg-unsplash.jpg')
 const backImage2 = require('../../assets/images/smiling-4654734_1280.jpg');
@@ -59,7 +61,7 @@ const AuthPage = props => {
            setNewPicture(cp) 
         }, 15000);
     }
-    const [isLogin, setLogin] = useState(true);
+    const [loginPage, setLoginPage] = useState("login");
     const [gender, setGender] = useState("");
 
     const [inputState, dispatchAction] = useReducer(inputReducer, {
@@ -126,6 +128,10 @@ const AuthPage = props => {
 
     const dispatch = useDispatch();
 
+    const nextStepHandler = () => {
+        setLoginPage("otherDetails")
+    }
+
     const loginUser = () => {
         setLoginLoading(true);
         const formData = {
@@ -141,16 +147,34 @@ const AuthPage = props => {
         ))
         if(result.includes(false)) {
             console.log("error")
-            Alert.alert("One of the fields is not correct")
+            Alert.alert(
+                "Error",
+                "One of the fields is not correct",
+                [
+                  { text: "OK" }
+                ],
+              );
         } else {
             if(inputState.password.value !== inputState.confirmPassword.value) {
-                Alert.alert("Passwords do not match!")
+                Alert.alert(
+                    "Error",
+                    "Passwords do not match",
+                    [
+                      { text: "OK" }
+                    ],
+                  );
                 return
             }
             if(gender === "") {
-                Alert.alert("Please select gender")
+                Alert.alert(
+                    "Gender required",
+                    "Please select gender",
+                    [
+                      { text: "OK" }
+                    ],
+                  );
             } else {
-                // setRegLoading(true)
+                setRegLoading(true)
                 const formData = {
                     firstName: inputState.firstName.value,
                     lastName: inputState.lastName.value,
@@ -158,7 +182,6 @@ const AuthPage = props => {
                     email: inputState.email.value,
                     password: inputState.password.value
                 }
-                console.log(formData)
                 dispatch(authActions.signUp(formData))
             }
         }
@@ -167,6 +190,17 @@ const AuthPage = props => {
 
     const authState = useSelector(state => state.auth);
     console.log(authState);
+
+    useEffect(() => {
+        if(authState.signUpStatus !== null) {
+            setRegLoading(false)
+            if(authState.signUpStatus === 201 || authState.signUpStatus === 200) {
+                setLoginPage("uploadPicture")
+            } else {
+                console.log("Registering failed")
+            }
+        }
+    }, [authState])   
 
     useEffect(() => {
         if(authState.status !== null) {
@@ -181,7 +215,7 @@ const AuthPage = props => {
 
 
    const renderAuthComponent = () => {
-    if(isLogin) {
+    if(loginPage === "login") {
         return (
             <ImageBackground source={backImage} style={styles.backgroundImage}>
                 <View style={styles.imageContainer}>
@@ -226,13 +260,13 @@ const AuthPage = props => {
                         />
                         </KeyboardAvoidingView> 
                         <Button title="Login" onPress={loginUser} />
-                        <Button onPress={() => setLogin(!isLogin)} title="Switch to Sign Up" color="transparent" />
+                        <Button onPress={() => setLoginPage("register")} title="Switch to Sign Up" color="transparent" />
                     </ScrollView>
                     </View>
                 </View>
             </ImageBackground>
         )
-    } else {
+    } else if (loginPage === "register") {
         return (
             <ImageBackground source={backImage3} style={styles.backgroundImage}>
                 <View style={styles.imageContainer}>
@@ -338,7 +372,7 @@ const AuthPage = props => {
                         />
                         </KeyboardAvoidingView> 
                         <Button title='Register' onPress={registerUser} />
-                        <Button onPress={() => setLogin(!isLogin)} title="Switch to Sign In" color="transparent" />
+                        <Button onPress={() => setLoginPage("login")} title="Switch to Sign In" color="transparent" />
                     </ScrollView>
                     </View>
 
@@ -346,6 +380,32 @@ const AuthPage = props => {
                 </KeyboardAvoidingView>
             </ImageBackground>
         )
+    } else if (loginPage === "uploadPicture") {
+        return (
+        <ImageBackground source={backImage2} style={styles.backgroundImage}>
+            <View style={styles.imageContainer}>
+                <Image source={logo} style={styles.logo} />
+            </View>
+            <View style={styles.formContainer}>
+                <UploadPicture nextStepHandler={nextStepHandler} />
+            </View>
+        </ImageBackground>
+        )
+    } else if(loginPage === "otherDetails") {
+        return (
+            <ImageBackground source={backImage2} style={styles.backgroundImage}>
+                <View style={styles.imageContainer}>
+                    <Image source={logo} style={styles.logo} />
+                </View>
+                <View style={styles.formContainer}>
+                    <OtherDetails />
+                </View>
+            </ImageBackground>
+        )
+    } else {
+        return <View>
+            <Text>NOO</Text>
+        </View>
     }
    }
     
@@ -409,8 +469,8 @@ const styles = StyleSheet.create({
         backgroundColor: '#000000ab',
         alignItems: 'center',
         justifyContent: 'center',
-        borderTopRightRadius: 20,
-        borderBottomLeftRadius: 20,
+        // borderTopRightRadius: 20,
+        // borderBottomLeftRadius: 20,
         zIndex: 10
     },
     loadingGif: {

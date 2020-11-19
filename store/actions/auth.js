@@ -21,6 +21,7 @@ export const signUp = (formData) => {
     return dispatch => {
         axios.post(`${APP_URL}/auth/register`, formData)
         .then(response => {
+            console.log(response);
             dispatch(signUpSuccess(response))
         })
         .catch(err => {

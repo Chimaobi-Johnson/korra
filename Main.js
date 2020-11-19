@@ -22,12 +22,7 @@ useEffect(() => {
 }, [])
 
 const authToken = useSelector(state => state.auth.token);
-console.log(authToken)
-
-// useEffect(() => {
-  
-// }, [authState])
-
+// const authToken = true
 
   return (
     <>
