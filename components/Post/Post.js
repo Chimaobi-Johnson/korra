@@ -29,7 +29,7 @@ const Post = props => {
                         </View>
                     </View>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => console.log("clicked")}>
+                <TouchableOpacity onPress={props.gotoQuestion}>
                     <View>
                         <Text style={styles.heading}>If education in Germany is free and good, then why doesn't everybody go there to study?</Text>
                         <Text>The problem with this question is, a lot of people do want to study in Germany. 

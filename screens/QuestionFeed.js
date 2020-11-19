@@ -4,11 +4,11 @@ import PostActions from '../components/Post/PostActions';
 import RelatedGroups from '../components/Post/RelatedGroups';
 
 const QuestionFeed = props => {
-    
+    const questionId = props.navigation.getParam("questionId");
     return (
             <View style={styles.wrapper}>
                 <View style={styles.textWrapper}>
-                    <Text style={styles.heading}>Display here</Text>
+                    <TouchableOpacity onPress={() => props.navigation.navigate("QuestionFeed")}><Text style={styles.heading}>Display here</Text></TouchableOpacity>
                     <View style={styles.topAnswer}>
                         <Text>
                         They see beyond first impressions and always know that there’s far more to a person than meets the eye. Everyone has their own story and they aren’t quick to judge someone until they feel they know them.
@@ -34,6 +34,10 @@ const QuestionFeed = props => {
                 
             </View>
     )
+}
+
+QuestionFeed.navigationOptions = {
+    headerTitle: 'Top Answer'
 }
 
 const styles = StyleSheet.create({

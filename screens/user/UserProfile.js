@@ -46,13 +46,15 @@ const UserProfile = props => {
     }, [])
 
     if(!userData) {
-        return <h4>Loading...</h4>
+        return <View><Text>Loading...</Text></View>
     }
+
+    // uri: userData.profilePhoto ? userData.profilePhoto : 
 
     return (
         <View style={styles.wrapper}>
             <View style={styles.topProfile}>
-                <Image style={styles.image} source={{uri: userData.profilePhoto ? userData.profilePhoto : placeholderImage}}/>
+                <Image style={styles.image} source={placeholderImage}/>
                 <View style={styles.textContainer}>
                     <Text style={styles.heading1}>{userData.firstName + " " + userData.lastName}</Text>
                     <Text style={styles.heading2}>{userData.email}</Text>

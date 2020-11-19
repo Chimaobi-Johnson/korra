@@ -51,6 +51,19 @@ export default (state = initialState, action) => {
                 status: null,
                 signUpStatus: action.payload.status
         }
+        case actionTypes.LOG_OUT:
+            AsyncStorage.removeItem('fall').then(result => {
+                console.log('token removed successfully')
+            }).catch(err => {
+                console.log(err)
+            })
+            return {
+                ...state,
+                status: null,
+                signUpStatus: null,
+                token: null,
+                userId: null
+        }
         default:
          return state
     }

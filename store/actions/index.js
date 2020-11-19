@@ -5,5 +5,6 @@ export {
     login,
     loginError,
     loginSuccess,
-    storeToken
+    storeToken,
+    logout
 } from './auth';

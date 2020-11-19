@@ -8,7 +8,7 @@ const RelatedGroups = props => {
         <View style={styles.wrapper}>
             <Text style={styles.heading}>Related Groups</Text>
             <View style={styles.groupWrapper}>
-                There are no related groups for now
+                <Text>There are no related groups for now</Text>
             </View>
         </View>
     )

@@ -9,11 +9,11 @@ import QuestionFeed from '../screens/QuestionFeed';
 import QuestionMainFeed from '../screens/QuestionMainFeed';
 
 
-const UserNavigator = createStackNavigator({
-    UserProfile: UserProfileScreen,
-    // Feed: FeedScreen,
-    // Question: QuestionFeed,
-    // QuestionFeed: QuestionMainFeed
+const FeedNavigator = createStackNavigator({
+    // UserProfile: UserProfileScreen,
+    Feed: FeedScreen,
+    Question: QuestionFeed,
+    QuestionFeed: QuestionMainFeed
 }, {
     defaultNavigationOptions: {
         headerStyle: {
@@ -24,4 +24,4 @@ const UserNavigator = createStackNavigator({
     }
 })
 
-export default createAppContainer(UserNavigator)
+export default createAppContainer(FeedNavigator)

@@ -23,6 +23,11 @@ const QuestionMainFeed = props => {
     )
 }
 
+QuestionMainFeed.navigationOptions = {
+    headerTitle: 'Answers'
+}
+
+
 const styles = StyleSheet.create({
     wrapper: {
 

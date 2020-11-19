@@ -8,7 +8,11 @@ import ReduxThunk from 'redux-thunk';
 import authReducer from './store/reducer/authReducer';
 import { getToken } from './utils/utils';
 import * as actions from './store/actions';
+import { enableScreens } from 'react-native-screens';
+
 import Main from './Main';
+
+enableScreens()
 
 const rootReducer = combineReducers({
   auth: authReducer

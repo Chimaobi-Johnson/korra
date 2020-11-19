@@ -6,6 +6,7 @@ export default {
     background: "#19191b",
     textColor: 'white',
     headingColor1: '#0d9bff',
+    headingColor2: '#1972f3',
     themeColor: {
         background: "#19191b",
         textColor: 'white',

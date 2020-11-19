@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { APP_URL } from '../../config';
-import { SIGN_UP_ERROR, SIGN_UP_SUCCESS, LOGIN_ERROR, LOGIN_SUCCESS, STORE_TOKEN } from './actionTypes';
+import { SIGN_UP_ERROR, SIGN_UP_SUCCESS, LOGIN_ERROR, LOGIN_SUCCESS, STORE_TOKEN, LOG_OUT } from './actionTypes';
 
 export const signUpSuccess = (response) => {
     console.log(response);
@@ -63,5 +63,11 @@ export const storeToken = (token) => {
     return {
         type: STORE_TOKEN,
         payload: token
+    }
+} 
+
+export const logout = () => {
+    return {
+        type: LOG_OUT,
     }
 } 

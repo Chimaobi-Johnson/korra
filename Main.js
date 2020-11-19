@@ -11,6 +11,10 @@ const Main = props => {
 
 const dispatch = useDispatch()
 
+// useEffect(() => {
+//   dispatch(authActions.logout());
+// }, [])
+
 useEffect(() => {
   getToken()
   .then(token => {
