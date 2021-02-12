@@ -56,6 +56,16 @@ Feed.navigationOptions = {
     headerStyle: {
         backgroundColor: colors.headingColor1,
     },
+    headerLeft: () => (
+        <TouchableOpacity
+          onPress={() => {}}
+          style={styles.headerPictureContainer}
+        >
+            <Text>
+                DP
+            </Text>
+        </TouchableOpacity>
+      ),
     // headerTintColor: 'blanchedalmond'
     headerTintColor: '#fff'
 }
@@ -82,6 +92,12 @@ const styles = StyleSheet.create({
         fontSize: 10,
         color: '#fff',
         alignSelf: 'center'
+    },
+    headerPictureContainer: {
+        backgroundColor: 'pink',
+        width: 80,
+        height: 70,
+        borderRadius: 100
     }
 })
 

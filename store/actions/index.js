@@ -8,3 +8,6 @@ export {
     storeToken,
     logout
 } from './auth';
+export {
+    storeUserData
+} from './auth';

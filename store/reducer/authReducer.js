@@ -12,9 +12,9 @@ const initialState = {
 export default (state = initialState, action) => {
     switch(action.type) {
         case actionTypes.LOGIN_SUCCESS:
-            console.log(action.payload)
+
             AsyncStorage.setItem('fall', action.payload.data.token).then(result => {
-                console.log('token stored successfully')
+            console.log('token stored successfully')
             }).catch(err => {
                 console.log(err)
             })

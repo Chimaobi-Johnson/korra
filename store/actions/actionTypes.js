@@ -9,3 +9,6 @@ export const STORE_TOKEN = 'STORE_TOKEN';
 
 export const LOG_OUT = 'LOG_OUT'
 
+//APP ACTIONS
+export const STORE_USER_DATA = 'STORE_USER_DATA';
+

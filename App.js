@@ -11,11 +11,13 @@ import * as actions from './store/actions';
 import { enableScreens } from 'react-native-screens';
 
 import Main from './Main';
+import appReducer from './store/reducer/appReducer';
 
 enableScreens()
 
 const rootReducer = combineReducers({
-  auth: authReducer
+  auth: authReducer,
+  app: appReducer
 });
 
 const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
