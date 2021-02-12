@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
     ScrollView,
     View,
@@ -17,9 +17,16 @@ import questions from "../data/questions";
 import Question from "../models/Question";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import CreatePost from "../components/Post/CreatePost/CreatePost";
 
 
 const Feed = props => {
+
+    const [modalVisible, setModalVisible] = useState(false);
+
+    const toggleModal = () => {
+        setModalVisible(!modalVisible);
+    }
 
     const renderPosts = ({ item }) => {
         return (
@@ -32,8 +39,9 @@ const Feed = props => {
         <View style={styles.wrapper}>
             <View style={styles.wrapper}>
                 <FlatList data={questions} renderItem={renderPosts} />
+                <CreatePost modalVisible={modalVisible} toggleModal={toggleModal} />
             </View>
-            <TouchableOpacity style={styles.addButton}>
+            <TouchableOpacity onPress={toggleModal} style={styles.addButton}>
                 <Text><FontAwesomeIcon style={styles.icon} icon={faPlus} /></Text>
             </TouchableOpacity>
             <View>
