@@ -54,21 +54,23 @@ const Feed = props => {
     )
 }
 
-Feed.navigationOptions = {
-    headerTitle: 'Home',
-    headerStyle: {
-        backgroundColor: colors.headingColor1,
-    },
-    headerLeft: () => (
-        <TouchableOpacity
-          onPress={() => {}}
-          style={styles.headerPictureContainer}
-        >
-        <Image style={styles.headerPicture} source={require('../assets/images/priscilla-du-preez-iprSslEBheg-unsplash.jpg')} />
-        </TouchableOpacity>
-      ),
-    // headerTintColor: 'blanchedalmond'
-    headerTintColor: '#fff'
+Feed.navigationOptions = navData => {
+    return {
+        headerTitle: 'Home',
+        headerStyle: {
+            backgroundColor: colors.headingColor1,
+        },
+        headerLeft: () => (
+            <TouchableOpacity
+              onPress={() => {navData.navigation.toggleDrawer()}}
+              style={styles.headerPictureContainer}
+            >
+            <Image style={styles.headerPicture} source={require('../assets/images/priscilla-du-preez-iprSslEBheg-unsplash.jpg')} />
+            </TouchableOpacity>
+          ),
+        // headerTintColor: 'blanchedalmond'
+        headerTintColor: '#fff'
+    }
 }
 
 
