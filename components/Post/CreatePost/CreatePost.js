@@ -21,20 +21,25 @@ const CreatePost = props => {
   const [category, setCategory] = useState("");
   const [tags, setTags] = useState([]);
   const [tagText, setTagText] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const submitPost = () => {
+    setLoading(true)
     const formData = {
       text,
       tags,
-      category
+      category,
+      userId: props.userId
     }
     console.log(formData)
 
     axios.post(`${APP_URL}/question`, formData)
     .then(result => {
       console.log(result)
+      setLoading(false)
     }).catch(err => {
       console.log(err)
+      setLoading(false)
     })
   }
 
@@ -146,7 +151,7 @@ const removeTagsHandler = (itemName) => {
             style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
             onPress={submitPost}
           >
-            <Text style={styles.textStyle}>Post</Text>
+            <Text style={styles.textStyle}>{loading ? 'Posting...' : 'Post'}</Text>
           </TouchableHighlight>
           </View>
         </View>

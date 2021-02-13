@@ -9,5 +9,22 @@ export {
     logout
 } from './auth';
 export {
-    storeUserData
+    fetchQuestions,
+    fetchQuestionsSuccess,
+    fetchQuestionsFail,
+    fetchQuestion,
+    fetchQuestionSuccess,
+    fetchQuestionFail,
+    fetchAnswers,
+    fetchAnswersFail,
+    fetchAnswersSuccess,
+    fetchAnswer,
+    fetchAnswerFail,
+    fetchAnswerSuccess,
+    fetchComment,
+    fetchCommentFail,
+    fetchCommentSuccess,
+    fetchComments,
+    fetchCommentsFail,
+    fetchCommentsSuccess,
 } from './app';

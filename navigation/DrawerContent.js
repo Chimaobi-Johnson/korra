@@ -19,7 +19,7 @@ const menuData = [
 const DrawerContent = props => {
     const userData = useContext(MainContext);
     if(!userData) {
-       return <h4>Loading...</h4>
+       return <Text>Loading...</Text>
     }
     return (
         <View style={styles.container}>

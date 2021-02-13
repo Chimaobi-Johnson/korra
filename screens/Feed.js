@@ -38,11 +38,14 @@ const Feed = props => {
             }})} />
         )
     }
+    if(!userData) {
+        return <Text>Loading...</Text>
+    }
     return (
         <View style={styles.wrapper}>
             <View style={styles.wrapper}>
                 <FlatList data={questions} renderItem={renderPosts} />
-                <CreatePost modalVisible={modalVisible} toggleModal={toggleModal} />
+                <CreatePost modalVisible={modalVisible} userId={userData._id} toggleModal={toggleModal} />
             </View>
             <TouchableOpacity onPress={toggleModal} style={styles.addButton}>
                 <Text><FontAwesomeIcon style={styles.icon} icon={faPlus} /></Text>
