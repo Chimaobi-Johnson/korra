@@ -12,6 +12,7 @@ import { MainContext } from './mainContext';
 const Main = props => {
 
 const [userData, setUserData] = useState(null);
+const dispatch = useDispatch();
 
 const fetchUser = authToken => {
     axios.get(`${APP_URL}/user`,

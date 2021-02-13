@@ -10,10 +10,8 @@ import {
 import colors from "../../theme/colors";
 
 import ProfileDetails from '../../components/Profile/ProfileDetails';
-import axios from "axios";
-import { APP_URL } from "../../config";
-import { getToken } from "../../utils/utils";
-import { useSelector } from "react-redux";
+import * as actions from '../../store/actions';
+import { useSelector, useDispatch } from "react-redux";
 import { MainContext } from '../../mainContext';
 
 const userPicFemale = 'https://randomuser.me/api/portraits/women/72.jpg';
@@ -25,6 +23,7 @@ const placeholderImage = require('../../assets/images/avatar-1577909_640.png');
 const UserProfile = props => {
 
     const userData = useContext(MainContext);
+    const dispatch = useDispatch();
 
     if(!userData) {
         return <View><Text>Loading...</Text></View>
@@ -50,7 +49,7 @@ const UserProfile = props => {
                  />
             </View>
             <View style={styles.buttonContainer}>
-                <Button style={styles.customButton} title="Exit"/>
+                <Button style={styles.customButton} onPress={() => dispatch(actions.logout())} title="Log out"/>
             </View>
         </View>
     )

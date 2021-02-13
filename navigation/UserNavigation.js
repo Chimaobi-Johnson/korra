@@ -15,7 +15,7 @@ const FeedNavigator = createStackNavigator({
     Feed: FeedScreen,
     Question: QuestionFeed,
     QuestionFeed: QuestionMainFeed,
- 
+    
 }, {
     defaultNavigationOptions: {
         headerStyle: {
