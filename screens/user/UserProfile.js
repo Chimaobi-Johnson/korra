@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
     ScrollView,
     View,
@@ -14,6 +14,7 @@ import axios from "axios";
 import { APP_URL } from "../../config";
 import { getToken } from "../../utils/utils";
 import { useSelector } from "react-redux";
+import { MainContext } from '../../mainContext';
 
 const userPicFemale = 'https://randomuser.me/api/portraits/women/72.jpg';
 const userPicFemale2 = 'https://randomuser.me/api/portraits/women/89.jpg';
@@ -23,27 +24,7 @@ const placeholderImage = require('../../assets/images/avatar-1577909_640.png');
 
 const UserProfile = props => {
 
-    const authToken = useSelector(state => state.auth.token);
-    const [userData, setUserData] = useState(null);
-
-    const fetchUser = () => {
-        axios.get(`${APP_URL}/user`,
-        {
-            headers: {
-                "content-type": "application/json",
-                Authorization: `${authToken}`,
-            },
-        }).then(result => {
-            console.log(result)
-            setUserData(result.data.user);
-        }).catch(err => {
-            console.log(err)
-        })
-    }
-
-    useEffect(() => {
-        fetchUser()
-    }, [])
+    const userData = useContext(MainContext);
 
     if(!userData) {
         return <View><Text>Loading...</Text></View>

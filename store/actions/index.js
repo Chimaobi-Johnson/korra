@@ -10,4 +10,4 @@ export {
 } from './auth';
 export {
     storeUserData
-} from './auth';
+} from './app';

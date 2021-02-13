@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
     ScrollView,
     View,
@@ -18,11 +18,16 @@ import Question from "../models/Question";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import CreatePost from "../components/Post/CreatePost/CreatePost";
+import { useSelector } from "react-redux";
+import { MainContext } from '../mainContext';
 
 
 const Feed = props => {
 
     const [modalVisible, setModalVisible] = useState(false);
+
+    const userData = useContext(MainContext);
+
 
     const toggleModal = () => {
         setModalVisible(!modalVisible);
