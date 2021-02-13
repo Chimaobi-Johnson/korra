@@ -14,11 +14,9 @@ import Post from "../components/Post/Post";
 import colors from "../theme/colors";
 
 import questions from "../data/questions";
-import Question from "../models/Question";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import CreatePost from "../components/Post/CreatePost/CreatePost";
-import { useSelector } from "react-redux";
 import { MainContext } from '../mainContext';
 
 
@@ -57,7 +55,7 @@ const Feed = props => {
 }
 
 Feed.navigationOptions = {
-    headerTitle: 'Feed',
+    headerTitle: 'Home',
     headerStyle: {
         backgroundColor: colors.headingColor1,
     },
@@ -66,9 +64,7 @@ Feed.navigationOptions = {
           onPress={() => {}}
           style={styles.headerPictureContainer}
         >
-            <Text>
-                DP
-            </Text>
+        <Image style={styles.headerPicture} source={require('../assets/images/priscilla-du-preez-iprSslEBheg-unsplash.jpg')} />
         </TouchableOpacity>
       ),
     // headerTintColor: 'blanchedalmond'
@@ -100,8 +96,14 @@ const styles = StyleSheet.create({
     },
     headerPictureContainer: {
         backgroundColor: 'pink',
-        width: 80,
-        height: 70,
+        width: 40,
+        height: 40,
+        borderRadius: 100,
+        marginLeft: 15
+    },
+    headerPicture: {
+        width: 40,
+        height: 40,
         borderRadius: 100
     }
 })

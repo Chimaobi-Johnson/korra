@@ -11,10 +11,10 @@ import QuestionMainFeed from '../screens/QuestionMainFeed';
 
 
 const FeedNavigator = createStackNavigator({
-    UserProfile: UserProfileScreen,
     Feed: FeedScreen,
     Question: QuestionFeed,
     QuestionFeed: QuestionMainFeed,
+    UserProfile: UserProfileScreen,
     
 }, {
     defaultNavigationOptions: {
