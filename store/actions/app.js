@@ -68,9 +68,9 @@ export const fetchQuestionFail = () => {
     }
 } 
 
-export const fetchMainAnswer = data => {
+export const fetchMainAnswer = data => dispatch => {
     dispatch({ type: FETCH_MAIN_ANSWER });
-    axios.get(`${APP_URL}/answer/main`)
+    axios.post(`${APP_URL}/answer/main`, data)
     .then(response => {
         console.log(response)
         dispatch(fetchMainAnswerSuccess(response))
