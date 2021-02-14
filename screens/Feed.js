@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import {
     ScrollView,
     View,
@@ -12,12 +12,12 @@ import {
 import FooterMenu from "../components/Footer/Footer";
 import Post from "../components/Post/Post";
 import colors from "../theme/colors";
-
-import questions from "../data/questions";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import CreatePost from "../components/Post/CreatePost/CreatePost";
 import { MainContext } from '../mainContext';
+import { useDispatch, useSelector } from "react-redux";
+import * as actions from '../store/actions';
 
 
 const Feed = props => {
@@ -25,26 +25,53 @@ const Feed = props => {
     const [modalVisible, setModalVisible] = useState(false);
 
     const userData = useContext(MainContext);
+    
+    const dispatch = useDispatch();
 
+    useEffect(() => {
+        dispatch(actions.fetchQuestions());
+    }, [])
+
+    const questionsData = useSelector(state => state.app.questions.data);
 
     const toggleModal = () => {
         setModalVisible(!modalVisible);
     }
 
+    console.log(questionsData)
+
+    // useEffect(() => {
+    //     // if user doesnt load within 30secs log user out
+    //     setTimeout(() => {
+    //         dispatch(actions.logout());
+    //     }, 30000);
+    // }, [])
+
+    if(!userData) {
+        return <Text>Loading user...</Text>
+    }
+
+    if(!questionsData) {
+        return <Text>Loading data...</Text>
+    }
+
+    if(questionsData.length === 0) {
+        return <Text>No questions available</Text>
+    }
+
     const renderPosts = ({ item }) => {
         return (
-            <Post gotoQuestion={() => props.navigation.navigate({routeName: 'Question', params : {
-                questionId: '1234567895'
+            <Post question={item} gotoQuestion={() => props.navigation.navigate({routeName: 'Question', params : {
+                questionId: item._id,
+                question: item.title
             }})} />
         )
     }
-    if(!userData) {
-        return <Text>Loading...</Text>
-    }
+
     return (
         <View style={styles.wrapper}>
             <View style={styles.wrapper}>
-                <FlatList data={questions} renderItem={renderPosts} />
+                <FlatList data={questionsData} renderItem={renderPosts} />
                 <CreatePost modalVisible={modalVisible} userId={userData._id} toggleModal={toggleModal} />
             </View>
             <TouchableOpacity onPress={toggleModal} style={styles.addButton}>
@@ -68,7 +95,7 @@ Feed.navigationOptions = navData => {
               onPress={() => {navData.navigation.toggleDrawer()}}
               style={styles.headerPictureContainer}
             >
-            <Image style={styles.headerPicture} source={require('../assets/images/priscilla-du-preez-iprSslEBheg-unsplash.jpg')} />
+            <Image style={styles.headerPicture} source={require('../assets/images/avatar-1577909_640.png')} />
             </TouchableOpacity>
           ),
         // headerTintColor: 'blanchedalmond'

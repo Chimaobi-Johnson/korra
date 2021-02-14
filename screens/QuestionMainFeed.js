@@ -8,11 +8,13 @@ import AnswerBlock from '../components/Question/AnswerBlock';
 import colors from '../theme/colors';
 
 const QuestionMainFeed = props => {
+
+    const question = props.navigation.getParam("question");
     
     return (
             <ScrollView style={styles.wrapper}>
                 <View style={styles.questionSection}>
-                    <Header text="How do you know if someone is mature or not?" />
+                    <Header text={question} />
                 </View>
                 <QuestionBar />
                 <Text style={styles.upperText}>100+ Answers</Text>

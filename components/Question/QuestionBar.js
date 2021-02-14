@@ -1,19 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
 import { faEllipsisH, faPenSquare, faUserPlus, faWifi } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import colors from '../../theme/colors';
+import AnswerModal from '../Modal/AnswerModal';
 
 
 
 const QuestionBar = props => {
-    
+
+    const [modalVisible, setModalVisible] = useState(false);
+    const toggleModal = () => {
+        setModalVisible(!modalVisible);
+    }
+
     return (
-        <View style={styles.wrapper}>
-            <Text style={styles.iconContainer}><FontAwesomeIcon style={styles.iconStyle} icon={faPenSquare} /></Text>
-            <Text style={styles.iconContainer}><FontAwesomeIcon style={styles.iconStyle} icon={faWifi} /></Text>
-            <Text style={styles.iconContainer}><FontAwesomeIcon style={styles.iconStyle} icon={faUserPlus} /></Text>
-            <Text style={styles.iconContainer}><FontAwesomeIcon style={styles.iconStyle} icon={faEllipsisH} /></Text>
+        <View>
+            <AnswerModal modalVisible toggleModal />
+            <View style={styles.wrapper}>
+                <Text onPress={toggleModal} style={styles.iconContainer}><FontAwesomeIcon style={styles.iconStyle} icon={faPenSquare} /></Text>
+                <Text style={styles.iconContainer}><FontAwesomeIcon style={styles.iconStyle} icon={faWifi} /></Text>
+                <Text style={styles.iconContainer}><FontAwesomeIcon style={styles.iconStyle} icon={faUserPlus} /></Text>
+                <Text style={styles.iconContainer}><FontAwesomeIcon style={styles.iconStyle} icon={faEllipsisH} /></Text>
+            </View>
         </View>
     )
 }

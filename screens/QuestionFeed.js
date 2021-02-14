@@ -1,14 +1,27 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
 import PostActions from '../components/Post/PostActions';
 import RelatedGroups from '../components/Post/RelatedGroups';
+import * as actions from '../store/actions';
 
 const QuestionFeed = props => {
+    const dispatch = useDispatch()
     const questionId = props.navigation.getParam("questionId");
+    const question = props.navigation.getParam("question");
+    // useEffect(() => {
+    //     dispatch(actions.fetchQuestion(questionId));
+    // }, [])
+    // const question = useSelector(state => state.app.question);
+
     return (
             <View style={styles.wrapper}>
                 <View style={styles.textWrapper}>
-                    <TouchableOpacity onPress={() => props.navigation.navigate("QuestionFeed")}><Text style={styles.heading}>Display here</Text></TouchableOpacity>
+                    <TouchableOpacity onPress={() => props.navigation.navigate({routeName: 'QuestionFeed', params : {
+                        questionId: questionId,
+                        question: question
+                        }})}>
+                    <Text style={styles.heading}>{question}</Text></TouchableOpacity>
                     <View style={styles.topAnswer}>
                         <Text>
                         They see beyond first impressions and always know that there’s far more to a person than meets the eye. Everyone has their own story and they aren’t quick to judge someone until they feel they know them.

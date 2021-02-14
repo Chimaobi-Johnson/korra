@@ -10,7 +10,6 @@ import QuestionMainFeed from '../screens/QuestionMainFeed';
 import DrawerContent from './DrawerContent';
 
 
-
 const FeedNavigator = createStackNavigator({
     Feed: FeedScreen,
     Question: QuestionFeed,

@@ -6,13 +6,13 @@ import PostStats from './PostStats';
 
 
 
-const Post = props => {
+const Post = ({ question, gotoQuestion }) => {
 
     // const randomImage = 'https://picsum.photos/400';
     const randomMale = 'https://randomuser.me/api/portraits/men/91.jpg';
     
     return (
-            <View style={styles.wrapper}>
+            <View key={question._id} style={styles.wrapper}>
                 <View style={styles.recommendation}>
                     <Text style={styles.recommendationText}>Answer Recommended to you</Text>
                     <Text><FontAwesomeIcon style={styles.recommendationIcon} icon={faTimes} /></Text>
@@ -20,21 +20,21 @@ const Post = props => {
                 <TouchableOpacity onPress={() => console.log("clicked")}>
                     <View style={styles.userContainer}>
                         <View style={styles.profilePicture}>
-                            <Image style={styles.profileImage} source={{ uri: randomMale }} />
+                            <Image style={styles.profileImage} source={question.userDetails.userImage[0] ? question.userDetails.userImage[0] : require('../../assets/images/avatar-1577909_640.png')} />
                         </View>
                         <View style={styles.userDetails}>
-                            <Text style={styles.heading2}>Chimaobi Wogu</Text>
-                            <Text style={styles.email}>Chimaobi.dev@gmail.com</Text>
-                            <Text style={styles.country}>Nigeria</Text>
+                            <Text style={styles.heading2}>{question.userDetails.firstName[0] + ' ' + question.userDetails.lastName[0]}</Text>
+                            <Text style={styles.email}>{question.userDetails.userEmail[0]}</Text>
+                            <Text style={styles.country}>{question.userDetails.country[0]}</Text>
                         </View>
                     </View>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={props.gotoQuestion}>
+                <TouchableOpacity onPress={gotoQuestion}>
                     <View>
-                        <Text style={styles.heading}>If education in Germany is free and good, then why doesn't everybody go there to study?</Text>
-                        <Text>The problem with this question is, a lot of people do want to study in Germany. 
-                            Medical school in Germany is free. That’s incredible. People know this and therefore apply 
-                            to study here. And because competition is so fierce, only students in the top ...read more</Text>
+                        <Text style={styles.heading}>{question.title}</Text>
+                        {/* the first answer is selected because on the backend the answers are sorted by the upvotes 
+                        so that the top answer is the most popular */}
+                        <Text>{question.answers.length === 0 ? 'This question has no answer yet' : question.answers[0].content}</Text>
                     </View>
                 </TouchableOpacity>
                 <PostStats />

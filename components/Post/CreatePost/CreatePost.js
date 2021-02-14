@@ -31,7 +31,6 @@ const CreatePost = props => {
       category,
       userId: props.userId
     }
-    console.log(formData)
 
     axios.post(`${APP_URL}/question`, formData)
     .then(result => {

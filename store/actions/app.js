@@ -1,3 +1,5 @@
+import axios from 'axios';
+import { APP_URL } from '../../config';
 import { 
     FETCH_ANSWER, 
     FETCH_ANSWERS, 
@@ -16,22 +18,31 @@ import {
     FETCH_QUESTIONS_SUCCESS
  } from "./actionTypes"
 
-export const fetchQuestions = () => {
+export const fetchQuestions = () => dispatch => {
+        dispatch({ type: FETCH_QUESTIONS });
+        axios.get(`${APP_URL}/questions`)
+        .then(response => {
+            console.log(response)
+            dispatch(fetchQuestionsSuccess(response))
+        })
+        .catch(err => {
+            console.log(err.response)
+            dispatch(fetchQuestionsFail(err))
+        })
+} 
+
+export const fetchQuestionsFail = (err) => {
     return {
-        type: FETCH_QUESTIONS
+        type: FETCH_QUESTIONS_FAIL,
+        payload: err
     }
 } 
 
-export const fetchQuestionsFail = () => {
-    return {
-        type: FETCH_QUESTIONS_FAIL
-    }
-} 
 
-
-export const fetchQuestionsSuccess = () => {
+export const fetchQuestionsSuccess = (data) => {
     return {
-        type: FETCH_QUESTIONS_SUCCESS
+        type: FETCH_QUESTIONS_SUCCESS,
+        payload: data
     }
 } 
 

@@ -14,3 +14,12 @@ export const getToken = () => (
         console.log("error fetching token")
     })
 )
+
+export const trimText = (text, maxChar) => {
+    let trimmedText;
+    if(text.length > maxChar) {
+        trimmedText = text.substring(0, maxChar) + '...';
+        trimmedText = text.substring(0, Math.min(text.length, text.lastIndexOf(" "))) + " . . .";
+    }
+    return trimmedText;
+}

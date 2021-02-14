@@ -40,7 +40,7 @@ export default (state = initialState, action) => {
                 ...state,
                 question: {
                     ...state.question,
-                    data: action.payload,
+                    data: action.payload.data,
                     status: action.payload.status,
                     loading: false
                 }
@@ -70,7 +70,7 @@ export default (state = initialState, action) => {
                 ...state,
                 questions: {
                     ...state.questions,
-                    data: action.payload,
+                    data: action.payload.data.questions,
                     status: action.payload.status,
                     loading: false
                 }
@@ -100,7 +100,7 @@ export default (state = initialState, action) => {
                 ...state,
                 answer: {
                     ...state.answer,
-                    data: action.payload,
+                    data: action.payload.data,
                     status: action.payload.status,
                     loading: false
                 }
@@ -119,7 +119,7 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 answers: {
-                    ...state.questions,
+                    ...state.answers,
                     data: null,
                     status: null,
                     loading: true
@@ -128,9 +128,9 @@ export default (state = initialState, action) => {
         case actionTypes.FETCH_ANSWERS_SUCCESS:
             return {
                 ...state,
-                questions: {
-                    ...state.questions,
-                    data: action.payload,
+                answers: {
+                    ...state.answers,
+                    data: action.payload.data,
                     status: action.payload.status,
                     loading: false
                 }
@@ -138,8 +138,8 @@ export default (state = initialState, action) => {
         case actionTypes.FETCH_ANSWERS_FAIL:
             return {
                 ...state,
-                questions: {
-                    ...state.questions,
+                answers: {
+                    ...state.answers,
                     data: null,
                     status: action.payload.status,
                     loading: false
