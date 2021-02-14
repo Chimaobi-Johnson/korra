@@ -27,4 +27,7 @@ export {
     fetchComments,
     fetchCommentsFail,
     fetchCommentsSuccess,
+    fetchMainAnswer,
+    fetchMainAnswerSuccess,
+    fetchMainAnswerFail
 } from './app';

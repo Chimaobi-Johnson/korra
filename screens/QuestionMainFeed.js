@@ -10,13 +10,14 @@ import colors from '../theme/colors';
 const QuestionMainFeed = props => {
 
     const question = props.navigation.getParam("question");
+    const questionId = props.navigation.getParam("questionId");
     
     return (
             <ScrollView style={styles.wrapper}>
                 <View style={styles.questionSection}>
                     <Header text={question} />
                 </View>
-                <QuestionBar />
+                <QuestionBar questionId={questionId} />
                 <Text style={styles.upperText}>100+ Answers</Text>
                 <AnswerBlock />
                 <AnswerBlock />

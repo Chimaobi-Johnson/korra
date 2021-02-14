@@ -11,6 +11,11 @@ const initialState = {
         status: null,
         loading: false
     },
+    mainAnswer: {
+        data: null,
+        status: null,
+        loading: false
+    },
     answers: {
         data: null,
         status: null,
@@ -80,6 +85,36 @@ export default (state = initialState, action) => {
                 ...state,
                 questions: {
                     ...state.questions,
+                    data: null,
+                    status: action.payload.status,
+                    loading: false
+                }
+            }
+            case actionTypes.FETCH_MAIN_ANSWER:
+            return {
+                ...state,
+                mainAnswer: {
+                    ...state.mainAnswer,
+                    data: null,
+                    status: null,
+                    loading: true
+                }
+            }
+        case actionTypes.FETCH_MAIN_ANSWER_SUCCESS:
+            return {
+                ...state,
+                mainAnswer: {
+                    ...state.mainAnswer,
+                    data: action.payload.data,
+                    status: action.payload.status,
+                    loading: false
+                }
+            }
+        case actionTypes.FETCH_MAIN_ANSWER_FAIL: 
+            return {
+                ...state,
+                mainAnswer: {
+                    ...state.mainAnswer,
                     data: null,
                     status: action.payload.status,
                     loading: false

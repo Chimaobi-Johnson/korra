@@ -13,6 +13,9 @@ import {
     FETCH_COMMENTS_SUCCESS, 
     FETCH_COMMENT_FAIL,
     FETCH_COMMENT_SUCCESS, 
+    FETCH_MAIN_ANSWER, 
+    FETCH_MAIN_ANSWER_FAIL, 
+    FETCH_MAIN_ANSWER_SUCCESS, 
     FETCH_QUESTIONS, 
     FETCH_QUESTIONS_FAIL,
     FETCH_QUESTIONS_SUCCESS
@@ -62,6 +65,33 @@ export const fetchQuestionSuccess = () => {
 export const fetchQuestionFail = () => {
     return {
         type: FETCH_QUESTION_FAIL
+    }
+} 
+
+export const fetchMainAnswer = data => {
+    dispatch({ type: FETCH_MAIN_ANSWER });
+    axios.get(`${APP_URL}/answer/main`)
+    .then(response => {
+        console.log(response)
+        dispatch(fetchMainAnswerSuccess(response))
+    })
+    .catch(err => {
+        console.log(err.response)
+        dispatch(fetchMainAnswerFail(err))
+    })
+} 
+
+export const fetchMainAnswerSuccess = data => {
+    return {
+        type: FETCH_MAIN_ANSWER_SUCCESS,
+        payload: data
+    }
+} 
+
+export const fetchMainAnswerFail = err => {
+    return {
+        type: FETCH_MAIN_ANSWER_FAIL,
+        error: err
     }
 } 
 

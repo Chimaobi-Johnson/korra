@@ -1,3 +1,4 @@
+import Axios from "axios";
 import React, { useState } from "react";
 import {
   Alert,
@@ -9,6 +10,7 @@ import {
   TouchableOpacity,
   View
 } from "react-native";
+import { APP_URL } from "../../config";
 
 
 const AnswerModal = props => {
@@ -16,6 +18,23 @@ const AnswerModal = props => {
   const { modalVisible, toggleModal } = props;
   const [text, onChangeText] = useState("");
   const [loading, setLoading] = useState(false);
+
+  const submitAnswer = () => {
+      const formData = {
+          text,
+          questionId: props.questionId,
+          userId: props.userId
+      }
+      setLoading(true)
+      Axios.post(`${APP_URL}/answer`, formData)
+      .then(result => {
+          setLoading(false);
+          console.log(result)
+      }).catch(err => {
+          setLoading(false)
+          console.log(err)
+      })
+  }
 
   return (
     <View style={styles.centeredView}>
@@ -46,9 +65,9 @@ const AnswerModal = props => {
           </TouchableHighlight>
           <TouchableHighlight
             style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
-            onPress={() => {}}
+            onPress={submitAnswer}
           >
-            <Text style={styles.textStyle}>Post</Text>
+            <Text style={styles.textStyle}>{loading ? 'Posting...' : 'Post'}</Text>
           </TouchableHighlight>
           </View>
         </View>
