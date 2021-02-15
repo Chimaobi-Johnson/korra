@@ -95,21 +95,30 @@ export const fetchMainAnswerFail = err => {
     }
 } 
 
-export const fetchAnswers = () => {
+export const fetchAnswers = data => dispatch => {
+    dispatch({ type: FETCH_ANSWERS });
+    axios.post(`${APP_URL}/answers`, data)
+    .then(response => {
+        console.log(response)
+        dispatch(fetchAnswersSuccess(response))
+    })
+    .catch(err => {
+        console.log(err.response)
+        dispatch(fetchAnswersFail(err))
+    })
+} 
+
+export const fetchAnswersFail = error => {
     return {
-        type: FETCH_ANSWERS
+        type: FETCH_ANSWERS_FAIL,
+        error: error
     }
 } 
 
-export const fetchAnswersFail = () => {
+export const fetchAnswersSuccess = data => {
     return {
-        type: FETCH_ANSWERS_FAIL
-    }
-} 
-
-export const fetchAnswersSuccess = () => {
-    return {
-        type: FETCH_ANSWERS_SUCCESS
+        type: FETCH_ANSWERS_SUCCESS,
+        payload: data
     }
 } 
 

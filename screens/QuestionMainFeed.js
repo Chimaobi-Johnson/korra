@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView } from 'react-native';
 import PostActions from '../components/Post/PostActions';
 import RelatedGroups from '../components/Post/RelatedGroups';
@@ -6,22 +6,34 @@ import Header from '../components/UI/Header';
 import QuestionBar from '../components/Question/QuestionBar';
 import AnswerBlock from '../components/Question/AnswerBlock';
 import colors from '../theme/colors';
+import { useDispatch, useSelector } from 'react-redux';
+import * as actions from '../store/actions';
 
 const QuestionMainFeed = props => {
-
+    const dispatch = useDispatch();
     const question = props.navigation.getParam("question");
     const questionId = props.navigation.getParam("questionId");
+
+    useEffect(() => {
+        dispatch(actions.fetchAnswers({ questionId }))
+    }, [])
     
+    const data = useSelector(state => state.app.answers);
+
+    if(!data.data) {
+        return <Text>Loading...</Text>
+    }
     return (
             <ScrollView style={styles.wrapper}>
                 <View style={styles.questionSection}>
                     <Header text={question} />
                 </View>
                 <QuestionBar questionId={questionId} />
-                <Text style={styles.upperText}>100+ Answers</Text>
-                <AnswerBlock />
-                <AnswerBlock />
-                <AnswerBlock />
+                <Text style={styles.upperText}>{data.data.answers.length} Answers</Text>
+                {data.data.answers.length != 0 ? data.data.answers.map(answer => (
+                  <AnswerBlock answer={answer} />
+                )) : 'No answers for this question yet'}
+
             </ScrollView>
     )
 }

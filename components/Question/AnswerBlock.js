@@ -12,17 +12,17 @@ import MoreButton from '../UI/MoreButton';
 const userPicFemale2 = 'https://randomuser.me/api/portraits/women/89.jpg';
 
 
-const AnswerBlocks = props => {
+const AnswerBlocks = ({ answer }) => {
     
     return (
         <View style={styles.wrapper}>
             <View style={styles.userArea}>
                 <View style={styles.imageContainer}>
-                    <Image style={styles.image} source={{uri: userPicFemale2}} />
+                    <Image style={styles.image} source={answer.userDetails.userImage[0] ? answer.userDetails.userImage[0] : require('../../assets/images/avatar-1577909_640.png')} />
                 </View>
                 <View style={styles.userInfo}>
-                    <Header size="sm" text="Prosper Okechukwu Ekeoma"/>
-                    <Text>Political Analyst and Mentor cum Trainer</Text>
+                    <Header size="sm" text={answer.userDetails.firstName[0] + ' ' + answer.userDetails.lastName[0]}/>
+                    <Text>{answer.userDetails.occupation[0] ? answer.userDetails.occupation[0] : answer.userDetails.userEmail[0]}</Text>
                     <Text style={styles.updatedAt}>Updated July 9</Text>
                 </View>
                 <View style={styles.requestContainer}>
@@ -30,14 +30,7 @@ const AnswerBlocks = props => {
                 </View>
             </View>
             <LinearGradient colors={['#fff', '#ffffff40']} style={styles.answerTextContainer}>
-                <Text style={styles.answerText}>
-                The problem with this question is, a lot of people do want to study in Germany. 
-                Medical school in Germany is free. That’s incredible. People know this and 
-                therefore apply to study here. And because competition is so fierce, only 
-                students in the top top percentile are successful. If you aren’t in the top 
-                5–1% avel here every spring to audition. Germany, by
-                allowing foreign students to have access.....
-                </Text>
+                <Text style={styles.answerText}>{answer.content}</Text>
                 <View style={styles.buttonContainer}>
                     <MoreButton title="Continue Reading" />
                 </View>
