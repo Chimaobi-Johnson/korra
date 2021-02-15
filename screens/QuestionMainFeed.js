@@ -31,7 +31,7 @@ const QuestionMainFeed = props => {
                 <QuestionBar questionId={questionId} />
                 <Text style={styles.upperText}>{data.data.answers.length} Answers</Text>
                 {data.data.answers.length != 0 ? data.data.answers.map(answer => (
-                  <AnswerBlock answer={answer} />
+                  <AnswerBlock key={answer._id} answer={answer} />
                 )) : 'No answers for this question yet'}
 
             </ScrollView>

@@ -6,7 +6,8 @@ const initialState = {
     status: null,
     expiresIn: null,
     signUpStatus: null,
-    userId: null
+    userId: null,
+    logoutLoading: false
 }
 
 export default (state = initialState, action) => {
@@ -52,6 +53,11 @@ export default (state = initialState, action) => {
                 signUpStatus: action.payload.status
         }
         case actionTypes.LOG_OUT:
+            return {
+                ...state,
+                logoutLoading: true
+        }
+        case actionTypes.LOG_OUT_SUCCESS:
             AsyncStorage.removeItem('fall').then(result => {
                 console.log('token removed successfully')
             }).catch(err => {
@@ -62,8 +68,14 @@ export default (state = initialState, action) => {
                 status: null,
                 signUpStatus: null,
                 token: null,
-                userId: null
+                userId: null,
+                logoutLoading: false
         }
+        case actionTypes.LOG_OUT_FAIL:
+            return {
+                ...state,
+                logoutLoading: false
+            }
         default:
          return state
     }

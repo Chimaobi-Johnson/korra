@@ -19,7 +19,7 @@ const QuestionBar = props => {
 
     return (
         <View>
-            <AnswerModal questionId={props.questionId} userId={userData._id} modalVisible toggleModal />
+            <AnswerModal questionId={props.questionId} userId={userData._id} modalVisible={modalVisible} toggleModal={toggleModal} />
             <View style={styles.wrapper}>
                 <Text onPress={toggleModal} style={styles.iconContainer}><FontAwesomeIcon style={styles.iconStyle} icon={faPenSquare} /></Text>
                 <Text style={styles.iconContainer}><FontAwesomeIcon style={styles.iconStyle} icon={faWifi} /></Text>

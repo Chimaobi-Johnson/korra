@@ -2,15 +2,26 @@ import React from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
 import { faArrowAltCircleUp, faArrowUp, faComment, faCommentAlt, faShare, faShareAlt, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import Axios from 'axios';
+import { APP_URL } from '../../config';
 
 
 
-const PostStats = props => {
+const PostStats = ({ userId, questionId }) => {
+
+    const upVoteQuestion = () => {
+        Axios.post(`${APP_URL}/upvote/question`, { userId, questionId })
+        .then(result => {
+            console.log(result);
+        }).catch(err => {
+            console.log(err)
+        })
+    }
     
     return (
         <View style={styles.wrapper}>
             <View style={styles.leftContainer}>
-                <View style={styles.upVote}>
+                <View onClick={upVoteQuestion} style={styles.upVote}>
                     <Text><FontAwesomeIcon icon={faArrowUp} /></Text>
                     <Text style={styles.values}>452</Text>
                 </View>

@@ -25,6 +25,8 @@ const UserProfile = props => {
     const userData = useContext(MainContext);
     const dispatch = useDispatch();
 
+    const authData = useSelector(state => state.auth);
+
     if(!userData) {
         return <View><Text>Loading...</Text></View>
     }
@@ -49,7 +51,7 @@ const UserProfile = props => {
                  />
             </View>
             <View style={styles.buttonContainer}>
-                <Button style={styles.customButton} onPress={() => dispatch(actions.logout())} title="Log out"/>
+                <Button style={styles.customButton} onPress={() => dispatch(actions.logout())} title={authData.logoutLoading ? 'Logging Out..' : 'Log Out'}/>
             </View>
         </View>
     )

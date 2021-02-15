@@ -21,6 +21,8 @@ const DrawerContent = props => {
     if(!userData) {
        return <Text>Loading...</Text>
     }
+    console.log(userData)
+
     return (
         <View style={styles.container}>
             <View style={styles.profileContainer}>

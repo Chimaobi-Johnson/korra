@@ -6,7 +6,9 @@ export {
     loginError,
     loginSuccess,
     storeToken,
-    logout
+    logout,
+    logoutSuccess,
+    logoutFail
 } from './auth';
 export {
     fetchQuestions,

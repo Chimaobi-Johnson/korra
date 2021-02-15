@@ -12,6 +12,8 @@ import { MainContext } from './mainContext';
 const Main = props => {
 
 const [userData, setUserData] = useState(null);
+const [token, setToken] = useState(null);
+
 const dispatch = useDispatch();
 
 const fetchUser = authToken => {
@@ -32,13 +34,22 @@ const fetchUser = authToken => {
 
 useEffect(() => {
   getToken()
-  .then(token => {
-    dispatch(authActions.storeToken(token))
-    fetchUser(token)
+  .then(tok => {  // token
+    fetchUser(tok) 
+    setToken(tok)
   })
   .catch(err => console.log(err));
   // setToken(true)
 }, [])
+
+useEffect(() => {
+  // if userData exists store token on redux, this is 
+  // so that th user loads first bfore the condition to redirect to 
+  // main navigator is called
+  if(userData) {
+    dispatch(authActions.storeToken(token))
+  }
+}, [userData])
 
 const authToken = useSelector(state => state.auth.token);
 

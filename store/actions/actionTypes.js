@@ -8,6 +8,9 @@ export const LOGIN_ERROR = 'LOGIN_ERROR';
 export const STORE_TOKEN = 'STORE_TOKEN';
 
 export const LOG_OUT = 'LOG_OUT'
+export const LOG_OUT_FAIL = 'LOG_OUT_FAIL'
+export const LOG_OUT_SUCCESS = 'LOG_OUT_SUCCESS'
+
 
 //APP ACTIONS
 

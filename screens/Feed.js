@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect, useCallback } from "react";
 import {
     ScrollView,
     View,
@@ -7,7 +7,8 @@ import {
     StyleSheet,
     Button,
     FlatList,
-    TouchableOpacity
+    TouchableOpacity,
+    RefreshControl
 } from "react-native";
 import FooterMenu from "../components/Footer/Footer";
 import Post from "../components/Post/Post";
@@ -19,10 +20,21 @@ import { MainContext } from '../mainContext';
 import { useDispatch, useSelector } from "react-redux";
 import * as actions from '../store/actions';
 
+const wait = (timeout) => {
+    return new Promise(resolve => setTimeout(resolve, timeout));
+}
+  
 
 const Feed = props => {
 
     const [modalVisible, setModalVisible] = useState(false);
+    const [refreshing, setRefreshing] = useState(false);
+
+        
+    const onRefresh = useCallback(() => {
+        setRefreshing(true);
+        wait(2000).then(() => setRefreshing(false));
+    }, []);
 
     const userData = useContext(MainContext);
     
@@ -59,9 +71,10 @@ const Feed = props => {
         return <Text>No questions available</Text>
     }
 
+
     const renderPosts = ({ item }) => {
         return (
-            <Post question={item} gotoQuestion={() => props.navigation.navigate({routeName: 'Question', params : {
+            <Post userId={userData._id} question={item} gotoQuestion={() => props.navigation.navigate({routeName: 'Question', params : {
                 questionId: item._id,
                 question: item.title
             }})} />
@@ -69,9 +82,14 @@ const Feed = props => {
     }
 
     return (
-        <View style={styles.wrapper}>
+        <ScrollView contentContainerStyle={styles.wrapper} refreshControl={
+            <RefreshControl
+              refreshing={refreshing}
+              onRefresh={onRefresh}
+            />
+          }>
             <View style={styles.wrapper}>
-                <FlatList data={questionsData} renderItem={renderPosts} />
+                <FlatList keyExtractor={(item, index) => item._id} data={questionsData} renderItem={renderPosts} />
                 <CreatePost modalVisible={modalVisible} userId={userData._id} toggleModal={toggleModal} />
             </View>
             <TouchableOpacity onPress={toggleModal} style={styles.addButton}>
@@ -80,7 +98,7 @@ const Feed = props => {
             <View>
                <FooterMenu />
             </View>
-        </View>
+        </ScrollView>
     )
 }
 

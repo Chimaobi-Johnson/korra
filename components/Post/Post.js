@@ -6,7 +6,7 @@ import PostStats from './PostStats';
 
 
 
-const Post = ({ question, gotoQuestion }) => {
+const Post = ({ userId, question, gotoQuestion }) => {
 
     // const randomImage = 'https://picsum.photos/400';
     const randomMale = 'https://randomuser.me/api/portraits/men/91.jpg';
@@ -37,7 +37,7 @@ const Post = ({ question, gotoQuestion }) => {
                         <Text>{question.answers.length === 0 ? 'This question has no answer yet' : question.answers[0].content}</Text>
                     </View>
                 </TouchableOpacity>
-                <PostStats />
+                <PostStats questionId={question._id} userId={userId} />
             </View>
     )
 }
